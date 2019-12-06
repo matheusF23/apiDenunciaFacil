@@ -1,27 +1,23 @@
-import mysql.connector
-from mysql.connector import Error
+import sqlite3
 
-try:
-    connection = mysql.connector.connect(host='localhost',
-                                         database='Electronics',
-                                         user='root',
-                                         password='1234')
+def createTable():
+    try:
 
-    mySql_Create_Table_Query = """CREATE TABLE Laptop ( 
-                             Id int(11) NOT NULL,
-                             Name varchar(250) NOT NULL,
-                             Price float NOT NULL,
-                             Purchase_date Date NOT NULL,
-                             PRIMARY KEY (Id)) """
+        connection = sqlite3.connect('denuncia.db')
 
-    cursor = connection.cursor()
-    result = cursor.execute(mySql_Create_Table_Query)
-    print("Laptop Table created successfully ")
+        mySql_Create_Table_Query = """CREATE TABLE Laptop ( 
+                                Id int(11) NOT NULL,
+                                Name varchar(250) NOT NULL,
+                                Price float NOT NULL,
+                                Purchase_date Date NOT NULL,
+                                PRIMARY KEY (Id)) """
 
-except mysql.connector.Error as error:
-    print("Failed to create table in MySQL: {}".format(error))
-finally:
-    if (connection.is_connected()):
-        cursor.close()
+        cursor = connection.cursor()
+        result = cursor.execute(mySql_Create_Table_Query)
+        print("Laptop Table created successfully ")
+
+    except:
+        print("Failed to create table")
+    finally:
         connection.close()
-        print("MySQL connection is closed")
+        print("connection is closed")
