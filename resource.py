@@ -1,7 +1,7 @@
 
 import sqlite3
 
-conn = sqlite3.connect('denuncia.db')
+conn = sqlite3.connect('denunciafacil.db')
 
 def read (id):
 
