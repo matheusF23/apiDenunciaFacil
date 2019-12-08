@@ -3,6 +3,10 @@ from resource import createUser, read
 
 app = Flask(__name__)
 
+@app.route('/')
+def user():
+    return "Seja Bem Vindo à API Denúncia Fácil"
+
 @app.route('/user')
 def user():
     cpf = request.args.get("cpf","")
