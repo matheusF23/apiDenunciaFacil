@@ -1,5 +1,0 @@
-cadastrar um usuário:
-http://localhost:5000/user?name=matheus&cpf=12345678912&username=theus&email=matheus@gmail.com&senha=1234
-
-atualizar um usuário:
-http://localhost:5000/user/update/12345678912/?name=Matheus+Figueiredo&cpf=88888888888&username=theus&email=matheus@gmail.com&senha=1234
