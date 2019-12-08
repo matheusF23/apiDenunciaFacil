@@ -1,28 +1,17 @@
 
 import sqlite3
 
+## Classe Usuário ##
 class Usuario():
     def createUser(self, kwargs):
-        cpf = ""
-        username = ""
-        name = ""
-        email = ""
-        senha = ""
+        cpf = kwargs["cpf"]
+        username = kwargs["username"]
+        name = kwargs["name"]
+        email = kwargs["email"]
+        senha = kwargs["senha"]
 
         conn = sqlite3.connect('denunciafacil.db')
         cursor = conn.cursor()
-        
-        for key, value in kwargs.items():
-            if(key == "cpf"):
-                cpf = value
-            elif(key == "username"):
-                username = value
-            elif(key == "name"):
-                name = value
-            elif(key == "email"):
-                email = value
-            elif(key == "senha"):
-                senha = value
 
         cursor.execute("""INSERT INTO usuario(cpf, username, nome, email, senha)
                         VALUES(?,?,?,?,?)""", (cpf, username, name, email, senha))
@@ -55,3 +44,33 @@ class Usuario():
             dictionaryList.append(montaDict)
 
         return dictionaryList
+
+    def updateUser(self, cpf, kwargs):
+        username = ""
+        name = ""
+        email = ""
+        senha = ""
+
+        conn = sqlite3.connect('denunciafacil.db')
+        cursor = conn.cursor()
+        
+        for key, value in kwargs.items():
+            if(key == "cpf"):
+                cpf = value
+            elif(key == "username"):
+                username = value
+            elif(key == "name"):
+                name = value
+            elif(key == "email"):
+                email = value
+            elif(key == "senha"):
+                senha = value
+
+        cursor.execute("""UPDATE usuario SET username = ?, name = ?, email = ?, senha = ? 
+                        WHERE id = ?""", (username, name, email, senha))
+
+        conn.commit()
+        conn.close()
+
+
+## Classe Motorista ##
