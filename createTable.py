@@ -13,7 +13,7 @@ def createTable():
                                 PRIMARY KEY (Id)) """
 
         cursor = connection.cursor()
-        result = cursor.execute(mySql_Create_Table_Query)
+        cursor.execute(mySql_Create_Table_Query)
         print("Laptop Table created successfully ")
 
     except:

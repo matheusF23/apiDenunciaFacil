@@ -1,0 +1,2 @@
+cadastrar um usuário:
+http://localhost:5000/user?name=matheus&cpf=12345678912&username=theus&email=matheus@gmail.com&senha=1234
