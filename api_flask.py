@@ -25,10 +25,10 @@ def user():
     createUser(dados)
     return "Usuário criado com sucesso", 201
 
-@app.route('/select')
+@app.route('/user/select')
 def selectUser():
     saida = read() 
-    return jsonify(saida)
+    return jsonify(saida), 200
 
 if __name__ == "__main__":
     app.run()
