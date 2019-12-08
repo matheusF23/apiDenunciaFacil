@@ -4,7 +4,7 @@ from resource import createUser, read
 app = Flask(__name__)
 
 @app.route('/')
-def user():
+def home():
     return "Seja Bem Vindo à API Denúncia Fácil"
 
 @app.route('/user')
