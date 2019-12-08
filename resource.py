@@ -38,14 +38,19 @@ def read ():
                     SELECT * FROM usuario;
                     """)
     
-    saida = cursor.fetchone()
+    out = []
+    dictionaryList = []
+    for linha in cursor.fetchall():
+        out.append(linha)
 
-    result = {
-                "cpf": saida[0],
-                "username": saida[2],
-                "name": saida[3],
-                "email": saida[1],
-                "senha": saida[4]
-            }
+    for i in out:
+        montaDict = {
+                    "cpf": i[0],
+                    "username": i[2],
+                    "name": i[3],
+                    "email": i[1],
+                    "senha": i[4]
+                }
+        dictionaryList.append(montaDict)
 
-    return result
+    return dictionaryList

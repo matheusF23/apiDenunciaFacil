@@ -1,4 +1,4 @@
-from flask import Flask, escape, request
+from flask import Flask, escape, request, jsonify
 from resource import createUser, read
 
 app = Flask(__name__)
@@ -23,12 +23,12 @@ def user():
                 "senha": senha
             }
     createUser(dados)
-    return "ok"
+    return "Usuário criado com sucesso", 201
 
 @app.route('/select')
 def selectUser():
     saida = read() 
-    return saida
+    return jsonify(saida)
 
 if __name__ == "__main__":
     app.run()
