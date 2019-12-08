@@ -11,11 +11,12 @@ def home():
 @app.route('/user')
 def user():
     usuario = Usuario()
-    cpf = request.args.get("cpf","")
-    username = request.args.get("username", "")
-    name = request.args.get("name", "")
-    email = request.args.get("email", "")
-    senha = request.args.get("senha", "")
+    
+    cpf = request.args.get("cpf")
+    username = request.args.get("username")
+    name = request.args.get("name")
+    email = request.args.get("email")
+    senha = request.args.get("senha")
 
     dados = {
                 "cpf": cpf,
@@ -24,8 +25,7 @@ def user():
                 "email": email,
                 "senha": senha
             }
-    usuario.createUser(dados)
-    return "Usuário criado com sucesso", 201
+    return usuario.createUser(dados)
 
 @app.route('/user/select')
 def selectUser():
@@ -37,11 +37,11 @@ def selectUser():
 def updateUser(_cpf):
     usuario = Usuario()
 
-    cpf = request.args.get("cpf","")
-    username = request.args.get("username", "")
-    name = request.args.get("name", "")
-    email = request.args.get("email", "")
-    senha = request.args.get("senha", "")
+    cpf = request.args.get("cpf")
+    username = request.args.get("username")
+    name = request.args.get("name")
+    email = request.args.get("email")
+    senha = request.args.get("senha")
 
     dados = {
                 "cpf": cpf,
@@ -50,9 +50,8 @@ def updateUser(_cpf):
                 "email": email,
                 "senha": senha
             }
-
-    usuario.updateUser(_cpf, dados)
-    return "Usuário atualizado com sucesso", 200
+   
+    return usuario.updateUser(_cpf, dados)
 
 if __name__ == "__main__":
     app.run(debug=True)
