@@ -77,6 +77,20 @@ class Usuario():
         finally:
             cursor.close()
             conn.close()
+    
+    def deleteUser(self, _cpf):
+        try:
+            conn = sqlite3.connect('denunciafacil.db')
+            cursor = conn.cursor()
 
+            cursor.execute("""DELETE FROM usuario WHERE cpf = ?""", (_cpf,))
+
+            conn.commit()
+            return "Usuário deletado com sucesso!"
+        except:
+            return "Erro Inesperado ao tentar deletar um usuário"
+        finally:
+            cursor.close()
+            conn.close()
 
 ## Classe Motorista ##

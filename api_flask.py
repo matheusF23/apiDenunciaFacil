@@ -53,5 +53,10 @@ def updateUser(_cpf):
    
     return usuario.updateUser(_cpf, dados)
 
+@app.route('/user/delete/<string:_cpf>')
+def deleteUser(_cpf):
+    usuario = Usuario()
+    return usuario.deleteUser(_cpf)
+
 if __name__ == "__main__":
     app.run(debug=True)
