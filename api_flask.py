@@ -1,5 +1,5 @@
 from flask import Flask, escape, request, jsonify
-from resource import createUser, read
+from resource import Usuario
 
 app = Flask(__name__)
 
@@ -9,6 +9,7 @@ def home():
 
 @app.route('/user')
 def user():
+    usuario = Usuario()
     cpf = request.args.get("cpf","")
     username = request.args.get("username", "")
     name = request.args.get("name", "")
@@ -22,13 +23,14 @@ def user():
                 "email": email,
                 "senha": senha
             }
-    createUser(dados)
+    usuario.createUser(dados)
     return "Usuário criado com sucesso", 201
 
 @app.route('/user/select')
 def selectUser():
-    saida = read() 
+    usuario = Usuario()
+    saida = usuario.readUser() 
     return jsonify(saida), 200
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
