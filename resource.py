@@ -45,29 +45,18 @@ class Usuario():
 
         return dictionaryList
 
-    def updateUser(self, cpf, kwargs):
-        username = ""
-        name = ""
-        email = ""
-        senha = ""
+    def updateUser(self, _cpf, kwargs):
+        cpf = kwargs["cpf"]
+        username = kwargs["username"]
+        name = kwargs["name"]
+        email = kwargs["email"]
+        senha = kwargs["senha"]
 
         conn = sqlite3.connect('denunciafacil.db')
         cursor = conn.cursor()
-        
-        for key, value in kwargs.items():
-            if(key == "cpf"):
-                cpf = value
-            elif(key == "username"):
-                username = value
-            elif(key == "name"):
-                name = value
-            elif(key == "email"):
-                email = value
-            elif(key == "senha"):
-                senha = value
 
-        cursor.execute("""UPDATE usuario SET username = ?, name = ?, email = ?, senha = ? 
-                        WHERE id = ?""", (username, name, email, senha))
+        cursor.execute("""UPDATE usuario SET cpf = ?, username = ?, nome = ?, email = ?, senha = ? 
+                        WHERE cpf = ?""", (cpf, username, name, email, senha, _cpf))
 
         conn.commit()
         conn.close()
