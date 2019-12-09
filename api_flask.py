@@ -37,7 +37,6 @@ def selectUserByCPF(cpf):
 # View User by email
 @app.route('/user/<string:email>/<string:senha>/', methods=['GET'])
 def selectUserByEmail(email, senha):
-    
     return Rules(None).validateLoginUser(email, senha)
 
 # Update User
@@ -54,8 +53,12 @@ def updateUser(cpf):
 # Delete User
 @app.route('/user/<string:cpf>/', methods=['DELETE'])
 def deleteUser(cpf):
-    user = UserRepository()
-    return user.deleteUser(cpf)
+    validateUserDelete = Rules(cpf).validateUserDelete()
+    if (validateUserDelete == 1):
+        user = UserRepository()
+        return user.deleteUser(cpf)
+    else:
+        return "ERROR! User not found.", 404
 
 
 ## Ocurrence routes ##

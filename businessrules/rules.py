@@ -16,6 +16,12 @@ class Rules():
             return 0
         else:
             return 1
+    
+    def validateUserDelete(self):
+        if(self.user.readUser(self.cpf) == []):
+            return 0
+        else:
+            return 1
 
     def validateLoginUser(self, email, senha):
         UserLis = self.user.readUser(None)
