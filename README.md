@@ -30,3 +30,15 @@ http://localhost:5000/ocorrencia?cpf_usuario=88888888888&placa=ABC0000&tipo_ocor
 **Visualizar ocorrências:**
 
 http://localhost:5000/ocorrencia/select
+
+**Atualizar uma ocorrência:**
+
+É preciso passar o id após update/
+
+http://localhost:5000/ocorrencia/update/1/?parametros...
+
+**Deletar uma ocorrência:**
+
+É preciso passar o id após delete/
+
+http://localhost:5000/ocorrencia/delete/1

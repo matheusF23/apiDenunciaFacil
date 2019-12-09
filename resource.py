@@ -141,6 +141,7 @@ class Ocorrencia():
 
             for i in out:
                 montaDict = {
+                            "id": i[0],
                             "cpf_usuario": i[10],
                             "placa": i[11],
                             "titulo_ocorrencia": i[1],
@@ -162,39 +163,47 @@ class Ocorrencia():
             cursor.close()
             conn.close()
 
-    def updateOcorrencia(self, _cpf, kwargs):
+    def updateOcorrencia(self, _id, kwargs):
         try:
-            cpf = kwargs["cpf"]
-            username = kwargs["username"]
-            name = kwargs["name"]
-            email = kwargs["email"]
-            senha = kwargs["senha"]
+            titulo_ocorrencia = kwargs["titulo_ocorrencia"]
+            tipo_ocorrencia = kwargs["tipo_ocorrencia"]
+            descricao = kwargs["descricao"]
+            data = kwargs["data"]
+            hora = kwargs["hora"]
+            bairro = kwargs["bairro"]
+            rua = kwargs["rua"]
+            cidade = kwargs["cidade"]
+            estado = kwargs["estado"]
+            cpf_usuario = kwargs["cpf_usuario"]
+            placa = kwargs["placa"]
 
             conn = sqlite3.connect('denunciafacil.db')
             cursor = conn.cursor()
 
-            cursor.execute("""UPDATE usuario SET cpf = ?, username = ?, nome = ?, email = ?, senha = ? 
-                            WHERE cpf = ?""", (cpf, username, name, email, senha, _cpf))
+            cursor.execute("""UPDATE ocorrencia SET titulo = ?, tipo_ocorrencia = ?, descricao = ?, 
+                            data = ?, hora = ?, bairro = ?, rua = ?, cidade = ?, estado = ?, cpf_usuario = ?,
+                            placa = ? WHERE id = ?""", (titulo_ocorrencia, tipo_ocorrencia, descricao, data, 
+                            hora, bairro, rua, cidade, estado, cpf_usuario, placa, _id))
 
             conn.commit()
-            return "Usuário atualizado com sucesso!", 201
+            return "Ocorrência atualizada com sucesso!", 201
         except:
-            return "Erro na atualização de usuário", 400
+            return "Erro na atualização da ocorrência", 400
         finally:
             cursor.close()
             conn.close()
     
-    def deleteOcorrencia(self, _cpf):
+    def deleteOcorrencia(self, _id):
         try:
             conn = sqlite3.connect('denunciafacil.db')
             cursor = conn.cursor()
 
-            cursor.execute("""DELETE FROM usuario WHERE cpf = ?""", (_cpf,))
+            cursor.execute("""DELETE FROM ocorrencia WHERE id = ?""", (_id,))
 
             conn.commit()
-            return "Usuário deletado com sucesso!"
+            return "Ocorrência deletado com sucesso!"
         except:
-            return "Erro Inesperado ao tentar deletar um usuário"
+            return "Erro Inesperado ao tentar deletar uma ocorrência"
         finally:
             cursor.close()
             conn.close()
