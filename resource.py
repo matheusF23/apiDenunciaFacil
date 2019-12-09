@@ -2,7 +2,7 @@
 import sqlite3
 
 ## Classe Usuário ##
-class Usuario():
+class UserRepository():
     def createUser(self, kwargs):
         try:
             cpf = kwargs["cpf"]
@@ -99,8 +99,8 @@ class Usuario():
             conn.close()
 
 ## Classe Ocorrência ##
-class Ocorrencia():
-    def createOcorrencia(self, kwargs):
+class OcurrenceRepository():
+    def createOcurrence(self, kwargs):
         try:
             titulo_ocorrencia = kwargs["titulo_ocorrencia"]
             tipo_ocorrencia = kwargs["tipo_ocorrencia"]
@@ -130,14 +130,19 @@ class Ocorrencia():
             conn.close()
 
 
-    def readOcorrencia (self):
+    def readOcurrence (self, _id):
         try:
             conn = sqlite3.connect('denunciafacil.db')
             cursor = conn.cursor()
             
-            cursor.execute("""
-                            SELECT * FROM ocorrencia;
-                            """)
+            if(_id):
+                cursor.execute("""
+                            SELECT * FROM ocorrencia WHERE id = ?;
+                            """, (_id,))
+            else:
+                cursor.execute("""
+                                SELECT * FROM ocorrencia;
+                                """)
             
             out = []
             dictionaryList = []
@@ -168,7 +173,7 @@ class Ocorrencia():
             cursor.close()
             conn.close()
 
-    def updateOcorrencia(self, _id, kwargs):
+    def updateOcurrence(self, _id, kwargs):
         try:
             titulo_ocorrencia = kwargs["titulo_ocorrencia"]
             tipo_ocorrencia = kwargs["tipo_ocorrencia"]
@@ -198,7 +203,7 @@ class Ocorrencia():
             cursor.close()
             conn.close()
     
-    def deleteOcorrencia(self, _id):
+    def deleteOcurrence(self, _id):
         try:
             conn = sqlite3.connect('denunciafacil.db')
             cursor = conn.cursor()

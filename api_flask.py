@@ -1,5 +1,5 @@
 from flask import Flask, escape, request, jsonify
-from resource import Usuario, Ocorrencia
+from resource import UserRepository, OcurrenceRepository
 
 app = Flask(__name__)
 
@@ -7,120 +7,75 @@ app = Flask(__name__)
 def home():
     return "Seja Bem Vindo à API Denúncia Fácil"
 
-## Rotas para Usuário ##
-# Criar Usuário
+## User routes ##
+# Create User
 @app.route('/user/<string:_cpf>/', methods=['POST'])
-def user():
-    usuario = Usuario()
-    dados = request.get_json()
-    return usuario.createUser(dados)
+def createUser(_cpf):
+    user = UserRepository()
+    data = request.get_json()
+    return user.createUser(data)
 
-# Visualizar usuários
+# View User
 @app.route('/user/', methods=['GET'])
 def selectUser():
-    usuario = Usuario()
-    saida = usuario.readUser(None) 
-    return jsonify(saida), 200
-# Visualizar usuário por CPF
+    user = UserRepository()
+    out = user.readUser(None) 
+    return jsonify(out), 200
+# View User by CPF
 @app.route('/user/<string:_cpf>/', methods=['GET'])
 def selectUserByCPF(_cpf):
-    usuario = Usuario()
-    saida = usuario.readUser(_cpf) 
-    return jsonify(saida), 200
+    user = UserRepository()
+    out = user.readUser(_cpf) 
+    return jsonify(out), 200
 
-# Atualizar Usuário
+# Update User
 @app.route('/user/<string:_cpf>/', methods=['PUT'])
 def updateUser(_cpf):
-    usuario = Usuario()
-    dados = request.get_json()
-    return usuario.updateUser(_cpf, dados)
+    user = UserRepository()
+    data = request.get_json()
+    return user.updateUser(_cpf, data)
 
-# Deletar Usuário
-@app.route('/user/<string:_cpf>', methods=['DELETE'])
+# Delete User
+@app.route('/user/<string:_cpf>/', methods=['DELETE'])
 def deleteUser(_cpf):
-    usuario = Usuario()
-    return usuario.deleteUser(_cpf)
+    user = UserRepository()
+    return user.deleteUser(_cpf)
 
 
-## Rotas para Ocorrência ##
-# Criar Ocorrência
-@app.route('/ocorrencia')
+## Ocurrence routes ##
+# Create Ocurrence
+@app.route('/ocurrence/', methods=['POST'])
 def ocorrencia():
-    ocorrencia = Ocorrencia()
-    
-    cpf_usuario = request.args.get("cpf_usuario")
-    placa = request.args.get("placa")
-    titulo_ocorrencia = request.args.get("titulo_ocorrencia")
-    tipo_ocorrencia = request.args.get("tipo_ocorrencia")
-    descricao = request.args.get("descricao")
-    data = request.args.get("data")
-    hora = request.args.get("hora")
-    bairro = request.args.get("bairro")
-    rua = request.args.get("rua")
-    cidade = request.args.get("cidade")
-    estado = request.args.get("estado")
+    ocurrence = OcurrenceRepository()
+    dados = request.get_json()
+    return ocurrence.createOcurrence(dados)
 
+# View Ocurrence
+@app.route('/ocurrence/', methods=['GET'])
+def selectOcurrence():
+    ocurrence = OcurrenceRepository()
+    out = ocurrence.readOcurrence(None)
+    return jsonify(out), 200
 
-    dados = {
-                "cpf_usuario": cpf_usuario,
-                "placa": placa,
-                "titulo_ocorrencia": titulo_ocorrencia,
-                "tipo_ocorrencia": tipo_ocorrencia,
-                "descricao": descricao,
-                "data": data,
-                "hora": hora,
-                "bairro": bairro,
-                "rua": rua,
-                "cidade": cidade,
-                "estado": estado
-            }
-    return ocorrencia.createOcorrencia(dados)
+# View Ocurrence by Id
+@app.route('/ocurrence/<string:_id>/', methods=['GET'])
+def selectOcurrenceById(_id):
+    ocurrence = OcurrenceRepository()
+    out = ocurrence.readOcurrence(_id) 
+    return jsonify(out), 200
 
-# Visualizar Ocorrências
-@app.route('/ocorrencia/select')
-def selectOcorrencia():
-    ocorrencia = Ocorrencia()
-    saida = ocorrencia.readOcorrencia()
-    return jsonify(saida), 200
+# Update Ocurrence
+@app.route('/ocurrence/<string:_id>/', methods=['PUT'])
+def updatOcurrence(_id):
+    ocurrence = OcurrenceRepository()
+    data = request.get_json()
+    return ocurrence.updateOcurrence(_id, data)
 
-# Atualizar Ocorrência
-@app.route('/ocorrencia/update/<string:_id>/')
-def updateOcorrencia(_id):
-    ocorrencia = Ocorrencia()
-
-    cpf_usuario = request.args.get("cpf_usuario")
-    placa = request.args.get("placa")
-    titulo_ocorrencia = request.args.get("titulo_ocorrencia")
-    tipo_ocorrencia = request.args.get("tipo_ocorrencia")
-    descricao = request.args.get("descricao")
-    data = request.args.get("data")
-    hora = request.args.get("hora")
-    bairro = request.args.get("bairro")
-    rua = request.args.get("rua")
-    cidade = request.args.get("cidade")
-    estado = request.args.get("estado")
-
-
-    dados = {
-                "cpf_usuario": cpf_usuario,
-                "placa": placa,
-                "titulo_ocorrencia": titulo_ocorrencia,
-                "tipo_ocorrencia": tipo_ocorrencia,
-                "descricao": descricao,
-                "data": data,
-                "hora": hora,
-                "bairro": bairro,
-                "rua": rua,
-                "cidade": cidade,
-                "estado": estado
-            }
-    return ocorrencia.updateOcorrencia(_id, dados)
-
-# Deletar Ocorrência
-@app.route('/ocorrencia/delete/<string:_id>')
-def deleteOcorrencia(_id):
-    ocorrencia = Ocorrencia()
-    return ocorrencia.deleteOcorrencia(_id)
+# Delete Ocurrence
+@app.route('/ocurrence/<string:_id>', methods=['DELETE'])
+def deleteOcurrence(_id):
+    ocurrence = OcurrenceRepository()
+    return ocurrence.deleteOcurrence(_id)
 
 
 if __name__ == "__main__":
