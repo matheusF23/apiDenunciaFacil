@@ -1,19 +1,24 @@
 from flask import Flask, escape, request, jsonify
 from resource import UserRepository, OcurrenceRepository
+from businessrules.rules import Rules
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Seja Bem Vindo à API Denúncia Fácil"
+    return "Welcome to API Denúncia Fácil"
 
 ## User routes ##
 # Create User
 @app.route('/user/<string:_cpf>/', methods=['POST'])
 def createUser(_cpf):
-    user = UserRepository()
-    data = request.get_json()
-    return user.createUser(data)
+    validateCreateUser = Rules().validateUser(_cpf)
+    if (validateCreateUser == 1):
+        user = UserRepository()
+        data = request.get_json()
+        return user.createUser(data)
+    else:
+        return "ERROR! User already exists.", 400
 
 # View User
 @app.route('/user/', methods=['GET'])

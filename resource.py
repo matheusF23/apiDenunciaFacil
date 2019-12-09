@@ -17,9 +17,9 @@ class UserRepository():
             cursor.execute("""INSERT INTO usuario(cpf, username, nome, email, senha)
                             VALUES(?,?,?,?,?)""", (cpf, username, name, email, senha))
             conn.commit()
-            return "Usuário criado com sucesso!", 201
+            return "User successfully created!", 201
         except:
-            return "Erro na criação de usuário", 400
+            return "Error creating user", 400
         finally:
             cursor.close()
             conn.close()
@@ -56,7 +56,7 @@ class UserRepository():
 
             return dictionaryList
         except:
-            return "Erro Insperado"
+            return "Unexpected error"
         finally:
             cursor.close()
             conn.close()
@@ -76,9 +76,9 @@ class UserRepository():
                             WHERE cpf = ?""", (cpf, username, name, email, senha, _cpf))
 
             conn.commit()
-            return "Usuário atualizado com sucesso!", 201
+            return "User updated successfully!", 201
         except:
-            return "Erro na atualização de usuário", 400
+            return "Error updating user!", 400
         finally:
             cursor.close()
             conn.close()
@@ -91,9 +91,9 @@ class UserRepository():
             cursor.execute("""DELETE FROM usuario WHERE cpf = ?""", (_cpf,))
 
             conn.commit()
-            return "Usuário deletado com sucesso!"
+            return "User deleted successfully!"
         except:
-            return "Erro Inesperado ao tentar deletar um usuário"
+            return "Unexpected error!"
         finally:
             cursor.close()
             conn.close()
@@ -122,9 +122,9 @@ class OcurrenceRepository():
                             VALUES(?,?,?,?,?,?,?,?,?,?,?)""", (titulo_ocorrencia, tipo_ocorrencia, descricao, data, 
                             hora, bairro, rua, cidade, estado, cpf_usuario, placa))
             conn.commit()
-            return "Ocorrência cadastrada com sucesso!", 201
+            return "Occurrence successfully registered!", 201
         except:
-            return "Erro no cadastro de ocorrência!", 400
+            return "Error in occurrence registration!", 400
         finally:
             cursor.close()
             conn.close()
@@ -168,7 +168,7 @@ class OcurrenceRepository():
 
             return dictionaryList
         except:
-            return "Erro Insperado"
+            return "Unexpected error"
         finally:
             cursor.close()
             conn.close()
@@ -196,9 +196,9 @@ class OcurrenceRepository():
                             hora, bairro, rua, cidade, estado, cpf_usuario, placa, _id))
 
             conn.commit()
-            return "Ocorrência atualizada com sucesso!", 201
+            return "Occurrence successfully updated!", 201
         except:
-            return "Erro na atualização da ocorrência", 400
+            return "Unexpected error", 400
         finally:
             cursor.close()
             conn.close()
@@ -211,9 +211,9 @@ class OcurrenceRepository():
             cursor.execute("""DELETE FROM ocorrencia WHERE id = ?""", (_id,))
 
             conn.commit()
-            return "Ocorrência deletado com sucesso!"
+            return "Occurrence deleted successfully!"
         except:
-            return "Erro Inesperado ao tentar deletar uma ocorrência"
+            return "Unexpected error"
         finally:
             cursor.close()
             conn.close()
