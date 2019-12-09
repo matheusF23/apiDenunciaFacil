@@ -10,10 +10,9 @@ cursor = conn.cursor()
 # conn.commit()
 
 cursor.execute("""
-            create table usuario(
+create table usuario(
                 cpf varchar(11) primary key,
                 email varchar(50) not null unique,
-                username varchar(30) not null unique,
                 nome varchar(50) not null,
                 senha varchar(30) not null
             );

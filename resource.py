@@ -6,7 +6,6 @@ class UserRepository():
     def createUser(self, kwargs):
         try:
             cpf = kwargs["cpf"]
-            username = kwargs["username"]
             name = kwargs["name"]
             email = kwargs["email"]
             senha = kwargs["senha"]
@@ -14,8 +13,8 @@ class UserRepository():
             conn = sqlite3.connect('denunciafacil.db')
             cursor = conn.cursor()
 
-            cursor.execute("""INSERT INTO usuario(cpf, username, nome, email, senha)
-                            VALUES(?,?,?,?,?)""", (cpf, username, name, email, senha))
+            cursor.execute("""INSERT INTO usuario(cpf, nome, email, senha)
+                            VALUES(?,?,?,?)""", (cpf, name, email, senha))
             conn.commit()
             return "User successfully created!", 201
         except:
@@ -47,10 +46,9 @@ class UserRepository():
             for i in out:
                 montaDict = {
                             "cpf": i[0],
-                            "username": i[2],
-                            "name": i[3],
+                            "name": i[2],
                             "email": i[1],
-                            "senha": i[4]
+                            "senha": i[3]
                         }
                 dictionaryList.append(montaDict)
 
@@ -64,7 +62,6 @@ class UserRepository():
     def updateUser(self, _cpf, kwargs):
         try:
             cpf = kwargs["cpf"]
-            username = kwargs["username"]
             name = kwargs["name"]
             email = kwargs["email"]
             senha = kwargs["senha"]
@@ -72,8 +69,8 @@ class UserRepository():
             conn = sqlite3.connect('denunciafacil.db')
             cursor = conn.cursor()
 
-            cursor.execute("""UPDATE usuario SET cpf = ?, username = ?, nome = ?, email = ?, senha = ? 
-                            WHERE cpf = ?""", (cpf, username, name, email, senha, _cpf))
+            cursor.execute("""UPDATE usuario SET cpf = ?, nome = ?, email = ?, senha = ? 
+                            WHERE cpf = ?""", (cpf, name, email, senha, _cpf))
 
             conn.commit()
             return "User updated successfully!", 201
