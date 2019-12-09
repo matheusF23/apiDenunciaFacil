@@ -10,8 +10,15 @@ cursor = conn.cursor()
 # conn.commit()
 
 cursor.execute("""
-SELECT * FROM motorista;
+            create table usuario(
+                cpf varchar(11) primary key,
+                email varchar(50) not null unique,
+                username varchar(30) not null unique,
+                nome varchar(50) not null,
+                senha varchar(30) not null
+            );
 """)
+conn.commit()
 
 for linha in cursor.fetchall():
     print(linha)

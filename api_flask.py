@@ -12,8 +12,8 @@ def home():
 # Create User
 @app.route('/user/<string:_cpf>/', methods=['POST'])
 def createUser(_cpf):
-    validateCreateUser = Rules().validateUser(_cpf)
-    if (validateCreateUser == 1):
+    validateUserCreate = Rules(_cpf).validateUserCreate()
+    if (validateUserCreate == 1):
         user = UserRepository()
         data = request.get_json()
         return user.createUser(data)
@@ -36,9 +36,13 @@ def selectUserByCPF(_cpf):
 # Update User
 @app.route('/user/<string:_cpf>/', methods=['PUT'])
 def updateUser(_cpf):
-    user = UserRepository()
-    data = request.get_json()
-    return user.updateUser(_cpf, data)
+    validateUserUpdate = Rules(_cpf).validateUserUpdate()
+    if (validateUserUpdate == 1):
+        user = UserRepository()
+        data = request.get_json()
+        return user.updateUser(_cpf, data)
+    else:
+        return "ERROR! User not found.", 404
 
 # Delete User
 @app.route('/user/<string:_cpf>/', methods=['DELETE'])
