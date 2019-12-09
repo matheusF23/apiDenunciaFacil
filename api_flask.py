@@ -9,55 +9,34 @@ def home():
 
 ## Rotas para Usuário ##
 # Criar Usuário
-@app.route('/user')
+@app.route('/user/<string:_cpf>/', methods=['POST'])
 def user():
     usuario = Usuario()
-    
-    cpf = request.args.get("cpf")
-    username = request.args.get("username")
-    name = request.args.get("name")
-    email = request.args.get("email")
-    senha = request.args.get("senha")
-
-    dados = {
-                "cpf": cpf,
-                "username": username,
-                "name": name,
-                "email": email,
-                "senha": senha
-            }
+    dados = request.get_json()
     return usuario.createUser(dados)
 
 # Visualizar usuários
-@app.route('/user/select')
+@app.route('/user/', methods=['GET'])
 def selectUser():
     usuario = Usuario()
-    saida = usuario.readUser() 
+    saida = usuario.readUser(None) 
+    return jsonify(saida), 200
+# Visualizar usuário por CPF
+@app.route('/user/<string:_cpf>/', methods=['GET'])
+def selectUserByCPF(_cpf):
+    usuario = Usuario()
+    saida = usuario.readUser(_cpf) 
     return jsonify(saida), 200
 
 # Atualizar Usuário
-@app.route('/user/update/<string:_cpf>/')
+@app.route('/user/<string:_cpf>/', methods=['PUT'])
 def updateUser(_cpf):
     usuario = Usuario()
-
-    cpf = request.args.get("cpf")
-    username = request.args.get("username")
-    name = request.args.get("name")
-    email = request.args.get("email")
-    senha = request.args.get("senha")
-
-    dados = {
-                "cpf": cpf,
-                "username": username,
-                "name": name,
-                "email": email,
-                "senha": senha
-            }
-   
+    dados = request.get_json()
     return usuario.updateUser(_cpf, dados)
 
 # Deletar Usuário
-@app.route('/user/delete/<string:_cpf>')
+@app.route('/user/<string:_cpf>', methods=['DELETE'])
 def deleteUser(_cpf):
     usuario = Usuario()
     return usuario.deleteUser(_cpf)

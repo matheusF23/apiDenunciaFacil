@@ -25,14 +25,19 @@ class Usuario():
             conn.close()
 
 
-    def readUser (self):
+    def readUser (self, _cpf):
         try:
             conn = sqlite3.connect('denunciafacil.db')
             cursor = conn.cursor()
-            
-            cursor.execute("""
-                            SELECT * FROM usuario;
-                            """)
+            if(_cpf):
+                print(_cpf)
+                cursor.execute("""
+                            SELECT * FROM usuario WHERE cpf = ?;
+                            """, (_cpf,))
+            else:
+                cursor.execute("""
+                                SELECT * FROM usuario;
+                                """)
             
             out = []
             dictionaryList = []
