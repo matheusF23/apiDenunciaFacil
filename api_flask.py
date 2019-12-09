@@ -10,9 +10,9 @@ def home():
 
 ## User routes ##
 # Create User
-@app.route('/user/<string:_cpf>/', methods=['POST'])
-def createUser(_cpf):
-    validateUserCreate = Rules(_cpf).validateUserCreate()
+@app.route('/user/<string:cpf>/', methods=['POST'])
+def createUser(cpf):
+    validateUserCreate = Rules(cpf).validateUserCreate()
     if (validateUserCreate == 1):
         user = UserRepository()
         data = request.get_json()
@@ -24,31 +24,38 @@ def createUser(_cpf):
 @app.route('/user/', methods=['GET'])
 def selectUser():
     user = UserRepository()
-    out = user.readUser(None) 
-    return jsonify(out), 200
-# View User by CPF
-@app.route('/user/<string:_cpf>/', methods=['GET'])
-def selectUserByCPF(_cpf):
-    user = UserRepository()
-    out = user.readUser(_cpf) 
+    out = user.readUser(None)
     return jsonify(out), 200
 
+# View User by CPF
+@app.route('/user/<string:cpf>/', methods=['GET'])
+def selectUserByCPF(cpf):
+    user = UserRepository()
+    out = user.readUser(cpf) 
+    return jsonify(out), 200
+
+# View User by email
+@app.route('/user/<string:email>/<string:senha>/', methods=['GET'])
+def selectUserByEmail(email, senha):
+    
+    return Rules(None).validateLoginUser(email, senha)
+
 # Update User
-@app.route('/user/<string:_cpf>/', methods=['PUT'])
-def updateUser(_cpf):
-    validateUserUpdate = Rules(_cpf).validateUserUpdate()
+@app.route('/user/<string:cpf>/', methods=['PUT'])
+def updateUser(cpf):
+    validateUserUpdate = Rules(cpf).validateUserUpdate()
     if (validateUserUpdate == 1):
         user = UserRepository()
         data = request.get_json()
-        return user.updateUser(_cpf, data)
+        return user.updateUser(cpf, data)
     else:
         return "ERROR! User not found.", 404
 
 # Delete User
-@app.route('/user/<string:_cpf>/', methods=['DELETE'])
-def deleteUser(_cpf):
+@app.route('/user/<string:cpf>/', methods=['DELETE'])
+def deleteUser(cpf):
     user = UserRepository()
-    return user.deleteUser(_cpf)
+    return user.deleteUser(cpf)
 
 
 ## Ocurrence routes ##

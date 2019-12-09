@@ -16,3 +16,14 @@ class Rules():
             return 0
         else:
             return 1
+
+    def validateLoginUser(self, email, senha):
+        UserLis = self.user.readUser(None)
+        for i in UserLis:
+            if(i["email"] == email):
+                if(i["senha"] == senha):
+                    return "Ok", 200
+                else:
+                    return "Invalid Key", 400
+        return "User not found", 404
+            
