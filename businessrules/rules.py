@@ -1,13 +1,13 @@
 from resource import UserRepository, OccurrenceRepository
 
 class Rules():
-    def __init__ (self, cpf):
-        self.cpf = cpf
+    def __init__ (self, email):
+        self.email = email
         self.user = UserRepository()
         self.occurrence = OccurrenceRepository()
 
     def userValidate(self):
-        if(self.user.readUser(self.cpf) == []):
+        if(self.user.readUser(self.email) == []):
             return 0
         else:
             return 1
@@ -18,10 +18,10 @@ class Rules():
         else:
             return 1
 
-    def validateLoginUser(self, email, senha):
+    def validateLoginUser(self, senha):
         UserLis = self.user.readUser(None)
         for i in UserLis:
-            if(i["email"] == email):
+            if(i["email"] == self.email):
                 if(i["senha"] == senha):
                     return "Ok", 200
                 else:

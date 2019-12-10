@@ -27,17 +27,17 @@ def selectUser():
     out = user.readUser(None)
     return jsonify(out), 200
 
-# View User by CPF
-@app.route('/user/<string:cpf>', methods=['GET'])
-def selectUserByCPF(cpf):
+# View User by email
+@app.route('/user/<string:email>', methods=['GET'])
+def selectUserByCPF(email):
     user = UserRepository()
-    out = user.readUser(cpf) 
+    out = user.readUser(email) 
     return jsonify(out), 200
 
 # Login Validate
 @app.route('/user/<string:email>/<string:senha>', methods=['GET'])
 def selectUserByEmail(email, senha):
-    return Rules(None).validateLoginUser(email, senha)
+    return Rules(email).validateLoginUser(senha)
 
 # Update User
 @app.route('/user/<string:cpf>/', methods=['PUT'])

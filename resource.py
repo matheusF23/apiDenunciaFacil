@@ -24,15 +24,15 @@ class UserRepository():
             conn.close()
 
 
-    def readUser (self, _cpf):
+    def readUser (self, _email):
         try:
             conn = sqlite3.connect('denunciafacil.db')
             cursor = conn.cursor()
-            if(_cpf):
-                print(_cpf)
+            if(_email):
+                print(_email)
                 cursor.execute("""
-                            SELECT * FROM usuario WHERE cpf = ?;
-                            """, (_cpf,))
+                            SELECT * FROM usuario WHERE email = ?;
+                            """, (_email,))
             else:
                 cursor.execute("""
                                 SELECT * FROM usuario;
