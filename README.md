@@ -34,25 +34,25 @@
 
 É preciso passar o cpf de quem fará a ocorrência
 
-[POST] https://api-denuncia-facil.herokuapp.com/ocurrence/cpf/arquivo.json
+[POST] https://api-denuncia-facil.herokuapp.com/occurrence/cpf/arquivo.json
 
 **Visualizar ocorrências:**
 
-[GET] https://api-denuncia-facil.herokuapp.com/ocurrence
+[GET] https://api-denuncia-facil.herokuapp.com/occurrence
 
 **Visualizar ocorrência por id:**
 
-[GET] https://api-denuncia-facil.herokuapp.com/ocurrence/id
+[GET] https://api-denuncia-facil.herokuapp.com/occurrence/id
 
 **Visualizar ocorrência por usuário:**
 
-[GET] https://api-denuncia-facil.herokuapp.com/ocurrence/user/cpf
+[GET] https://api-denuncia-facil.herokuapp.com/occurrence/user/cpf
 
 **Atualizar uma ocorrência:**
 
 É preciso passar o id
 
-[PUT] https://api-denuncia-facil.herokuapp.com/ocurrence/id
+[PUT] https://api-denuncia-facil.herokuapp.com/occurrence/id
 
 **Deletar uma ocorrência:**
 

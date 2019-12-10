@@ -1,5 +1,5 @@
 from flask import Flask, escape, request, jsonify
-from resource import UserRepository, OcurrenceRepository
+from resource import UserRepository, OccurrenceRepository
 from businessrules.rules import Rules
 
 app = Flask(__name__)
@@ -61,60 +61,60 @@ def deleteUser(cpf):
         return "ERROR! User not found.", 404
 
 
-## Ocurrence routes ##
-# Create Ocurrence
-@app.route('/ocurrence/<string:cpf>/', methods=['POST'])
-def createOcurrence(cpf):
-    validateOcurrenceCreate = Rules(cpf).userValidate()
-    if (validateOcurrenceCreate == 1):
-        ocurrence = OcurrenceRepository()
+## Occurrence routes ##
+# Create Occurrence
+@app.route('/occurrence/<string:cpf>/', methods=['POST'])
+def createOccurrence(cpf):
+    validateOccurrenceCreate = Rules(cpf).userValidate()
+    if (validateOccurrenceCreate == 1):
+        occurrence = OccurrenceRepository()
         data = request.get_json()
-        return ocurrence.createOcurrence(data)
+        return occurrence.createOccurrence(data)
     else:
         return "ERROR! User not found..", 404
 
-# View Ocurrence
-@app.route('/ocurrence', methods=['GET'])
-def selectOcurrence():
-    ocurrence = OcurrenceRepository()
-    out = ocurrence.readOcurrence(None)
+# View Occurrence
+@app.route('/occurrence', methods=['GET'])
+def selectOccurrence():
+    occurrence = OccurrenceRepository()
+    out = occurrence.readOccurrence(None)
     return jsonify(out), 200
 
-# View Ocurrence by Id
-@app.route('/ocurrence/<string:id>', methods=['GET'])
-def selectOcurrenceById(id):
-    ocurrence = OcurrenceRepository()
-    out = ocurrence.readOcurrence(id) 
+# View Occurrence by Id
+@app.route('/occurrence/<string:id>', methods=['GET'])
+def selectOccurrenceById(id):
+    occurrence = OccurrenceRepository()
+    out = occurrence.readOccurrence(id) 
     return jsonify(out), 200
 
-# View Ocurrence by User
-@app.route('/ocurrence/user/<string:cpf>', methods=['GET'])
-def selectOcurrenceByUser(cpf):
-    ocurrence = OcurrenceRepository()
-    out = ocurrence.readOcurrenceByUser(cpf)
+# View Occurrence by User
+@app.route('/occurrence/user/<string:cpf>', methods=['GET'])
+def selectOccurrenceByUser(cpf):
+    occurrence = OccurrenceRepository()
+    out = occurrence.readOccurrenceByUser(cpf)
     return jsonify(out), 200
 
-# Update Ocurrence
-@app.route('/ocurrence/<string:id>/', methods=['PUT'])
-def updatOcurrence(id):
-    validateOcurrenceUpdate = Rules(None).ocurrenceValidate(id)
-    if (validateOcurrenceUpdate == 1):
-        ocurrence = OcurrenceRepository()
+# Update Occurrence
+@app.route('/occurrence/<string:id>/', methods=['PUT'])
+def updatOccurrence(id):
+    validateOccurrenceUpdate = Rules(None).occurrenceValidate(id)
+    if (validateOccurrenceUpdate == 1):
+        occurrence = OccurrenceRepository()
         data = request.get_json()
-        return ocurrence.updateOcurrence(id, data)
+        return occurrence.updateOccurrence(id, data)
     else:
-        return "ERROR! Ocurrence not found.", 404
+        return "ERROR! Occurrence not found.", 404
     
 
-# Delete Ocurrence
-@app.route('/ocurrence/<string:id>', methods=['DELETE'])
-def deleteOcurrence(id):
-    validateOcurrenceDelete = Rules(None).ocurrenceValidate(id)
-    if (validateOcurrenceDelete == 1):
-        ocurrence = OcurrenceRepository()
-        return ocurrence.deleteOcurrence(id)
+# Delete Occurrence
+@app.route('/occurrence/<string:id>', methods=['DELETE'])
+def deleteOccurrence(id):
+    validateOccurrenceDelete = Rules(None).occurrenceValidate(id)
+    if (validateOccurrenceDelete == 1):
+        occurrence = OccurrenceRepository()
+        return occurrence.deleteOccurrence(id)
     else:
-        return "ERROR! Ocurrence not found.", 404
+        return "ERROR! Occurrence not found.", 404
     
 
 if __name__ == "__main__":

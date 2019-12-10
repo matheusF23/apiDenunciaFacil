@@ -96,8 +96,8 @@ class UserRepository():
             conn.close()
 
 ## Classe Ocorrência ##
-class OcurrenceRepository():
-    def createOcurrence(self, kwargs):
+class OccurrenceRepository():
+    def createOccurrence(self, kwargs):
         try:
             titulo_ocorrencia = kwargs["titulo_ocorrencia"]
             tipo_ocorrencia = kwargs["tipo_ocorrencia"]
@@ -127,7 +127,7 @@ class OcurrenceRepository():
             conn.close()
 
 
-    def readOcurrence (self, _id):
+    def readOccurrence (self, _id):
         try:
             conn = sqlite3.connect('denunciafacil.db')
             cursor = conn.cursor()
@@ -170,7 +170,7 @@ class OcurrenceRepository():
             cursor.close()
             conn.close()
 
-    def readOcurrenceByUser(self, _cpf):
+    def readOccurrenceByUser(self, _cpf):
         try:
             conn = sqlite3.connect('denunciafacil.db')
             cursor = conn.cursor()
@@ -208,7 +208,7 @@ class OcurrenceRepository():
             cursor.close()
             conn.close()
 
-    def updateOcurrence(self, _id, kwargs):
+    def updateOccurrence(self, _id, kwargs):
         try:
             titulo_ocorrencia = kwargs["titulo_ocorrencia"]
             tipo_ocorrencia = kwargs["tipo_ocorrencia"]
@@ -238,7 +238,7 @@ class OcurrenceRepository():
             cursor.close()
             conn.close()
     
-    def deleteOcurrence(self, _id):
+    def deleteOccurrence(self, _id):
         try:
             conn = sqlite3.connect('denunciafacil.db')
             cursor = conn.cursor()
