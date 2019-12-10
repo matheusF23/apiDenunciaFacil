@@ -16,7 +16,7 @@ class UserRepository():
             cursor.execute("""INSERT INTO usuario(cpf, nome, email, senha)
                             VALUES(?,?,?,?)""", (cpf, name, email, senha))
             conn.commit()
-            return "User successfully created!", 201
+            return "User created successfully!", 201
         except:
             return "Error creating user", 400
         finally:
@@ -119,7 +119,7 @@ class OcurrenceRepository():
                             VALUES(?,?,?,?,?,?,?,?,?,?,?)""", (titulo_ocorrencia, tipo_ocorrencia, descricao, data, 
                             hora, bairro, rua, cidade, estado, cpf_usuario, placa))
             conn.commit()
-            return "Occurrence successfully registered!", 201
+            return "Occurrence registered successfully!", 201
         except:
             return "Error in occurrence registration!", 400
         finally:
@@ -231,7 +231,7 @@ class OcurrenceRepository():
                             hora, bairro, rua, cidade, estado, cpf_usuario, placa, _id))
 
             conn.commit()
-            return "Occurrence successfully updated!", 201
+            return "Occurrence updated successfully!", 201
         except:
             return "Unexpected error", 400
         finally:
