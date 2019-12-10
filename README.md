@@ -8,26 +8,26 @@
 
 **Visualizar usuarios:**
 
-[GET] https://api-denuncia-facil.herokuapp.com/user/
+[GET] https://api-denuncia-facil.herokuapp.com/user
 
 **Visualizar usuarios por cpf:**
 
-[GET] https://api-denuncia-facil.herokuapp.com/user/cpf/
+[GET] https://api-denuncia-facil.herokuapp.com/user/cpf
 
 **Validar login**
 
-[GET] https://api-denuncia-facil.herokuapp.com/user/email/cpf/
+[GET] https://api-denuncia-facil.herokuapp.com/user/email/cpf
 
 **Atualizar um usuário:**
 É preciso passar o cpf
 
-[PUT] https://api-denuncia-facil.herokuapp.com/user/cpf/
+[PUT] https://api-denuncia-facil.herokuapp.com/user/cpf
 
 
 **Deletar um usuário:**
 É preciso passar o cpf
 
-[DELETE] https://api-denuncia-facil.herokuapp.com/user/cpf/
+[DELETE] https://api-denuncia-facil.herokuapp.com/user/cpf
 
 ### Comandos para Ocorrência
 **Cadastrar uma ocorrência:**
@@ -38,21 +38,21 @@
 
 **Visualizar ocorrências:**
 
-[GET] https://api-denuncia-facil.herokuapp.com/ocurrence/
+[GET] https://api-denuncia-facil.herokuapp.com/ocurrence
 
 **Visualizar ocorrência por id:**
 
-[GET] https://api-denuncia-facil.herokuapp.com/ocurrence/id/
+[GET] https://api-denuncia-facil.herokuapp.com/ocurrence/id
 
 **Visualizar ocorrência por usuário:**
 
-[GET] https://api-denuncia-facil.herokuapp.com/ocurrence/user/cpf/
+[GET] https://api-denuncia-facil.herokuapp.com/ocurrence/user/cpf
 
 **Atualizar uma ocorrência:**
 
 É preciso passar o id
 
-[PUT] https://api-denuncia-facil.herokuapp.com/ocurrence/id/
+[PUT] https://api-denuncia-facil.herokuapp.com/ocurrence/id
 
 **Deletar uma ocorrência:**
 

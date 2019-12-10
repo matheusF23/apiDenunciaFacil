@@ -246,9 +246,9 @@ class OcurrenceRepository():
             cursor.execute("""DELETE FROM ocorrencia WHERE id = ?""", (_id,))
 
             conn.commit()
-            return "Occurrence deleted successfully!"
+            return "Occurrence deleted successfully!", 200
         except:
-            return "Unexpected error"
+            return "Unexpected error", 400
         finally:
             cursor.close()
             conn.close()

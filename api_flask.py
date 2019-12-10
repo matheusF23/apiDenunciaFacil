@@ -12,7 +12,7 @@ def home():
 # Create User
 @app.route('/user/<string:cpf>/', methods=['POST'])
 def createUser(cpf):
-    validateUserCreate = Rules(cpf).validate()
+    validateUserCreate = Rules(cpf).userValidate()
     if (validateUserCreate == 0):
         user = UserRepository()
         data = request.get_json()
@@ -42,7 +42,7 @@ def selectUserByEmail(email, senha):
 # Update User
 @app.route('/user/<string:cpf>/', methods=['PUT'])
 def updateUser(cpf):
-    validateUserUpdate = Rules(cpf).validate()
+    validateUserUpdate = Rules(cpf).userValidate()
     if (validateUserUpdate == 1):
         user = UserRepository()
         data = request.get_json()
@@ -53,7 +53,7 @@ def updateUser(cpf):
 # Delete User
 @app.route('/user/<string:cpf>/', methods=['DELETE'])
 def deleteUser(cpf):
-    validateUserDelete = Rules(cpf).validate()
+    validateUserDelete = Rules(cpf).userValidate()
     if (validateUserDelete == 1):
         user = UserRepository()
         return user.deleteUser(cpf)
@@ -65,7 +65,7 @@ def deleteUser(cpf):
 # Create Ocurrence
 @app.route('/ocurrence/<string:cpf>/', methods=['POST'])
 def createOcurrence(cpf):
-    validateOcurrenceCreate = Rules(cpf).validate()
+    validateOcurrenceCreate = Rules(cpf).userValidate()
     if (validateOcurrenceCreate == 1):
         ocurrence = OcurrenceRepository()
         data = request.get_json()
@@ -74,21 +74,21 @@ def createOcurrence(cpf):
         return "ERROR! User not found..", 404
 
 # View Ocurrence
-@app.route('/ocurrence/', methods=['GET'])
+@app.route('/ocurrence', methods=['GET'])
 def selectOcurrence():
     ocurrence = OcurrenceRepository()
     out = ocurrence.readOcurrence(None)
     return jsonify(out), 200
 
 # View Ocurrence by Id
-@app.route('/ocurrence/<int:id>/', methods=['GET'])
+@app.route('/ocurrence/<string:id>', methods=['GET'])
 def selectOcurrenceById(id):
     ocurrence = OcurrenceRepository()
     out = ocurrence.readOcurrence(id) 
     return jsonify(out), 200
 
 # View Ocurrence by User
-@app.route('/ocurrence/user/<string:cpf>/', methods=['GET'])
+@app.route('/ocurrence/user/<string:cpf>', methods=['GET'])
 def selectOcurrenceByUser(cpf):
     ocurrence = OcurrenceRepository()
     out = ocurrence.readOcurrenceByUser(cpf)
@@ -97,15 +97,25 @@ def selectOcurrenceByUser(cpf):
 # Update Ocurrence
 @app.route('/ocurrence/<string:id>/', methods=['PUT'])
 def updatOcurrence(id):
-    ocurrence = OcurrenceRepository()
-    data = request.get_json()
-    return ocurrence.updateOcurrence(id, data)
+    validateOcurrenceUpdate = Rules(None).ocurrenceValidate(id)
+    if (validateOcurrenceUpdate == 1):
+        ocurrence = OcurrenceRepository()
+        data = request.get_json()
+        return ocurrence.updateOcurrence(id, data)
+    else:
+        return "ERROR! Ocurrence not found.", 404
+    
 
 # Delete Ocurrence
 @app.route('/ocurrence/<string:id>', methods=['DELETE'])
 def deleteOcurrence(id):
-    ocurrence = OcurrenceRepository()
-    return ocurrence.deleteOcurrence(id)
+    validateOcurrenceDelete = Rules(None).ocurrenceValidate(id)
+    if (validateOcurrenceDelete == 1):
+        ocurrence = OcurrenceRepository()
+        return ocurrence.deleteOcurrence(id)
+    else:
+        return "ERROR! Ocurrence not found.", 404
+    
 
 
 if __name__ == "__main__":

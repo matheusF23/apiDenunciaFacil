@@ -1,12 +1,19 @@
-from resource import UserRepository
+from resource import UserRepository, OcurrenceRepository
 
 class Rules():
     def __init__ (self, cpf):
         self.cpf = cpf
         self.user = UserRepository()
+        self.ocurrence = OcurrenceRepository()
 
-    def validate(self):
+    def userValidate(self):
         if(self.user.readUser(self.cpf) == []):
+            return 0
+        else:
+            return 1
+    
+    def ocurrenceValidate(self, id):
+        if(self.ocurrence.readOcurrence(id) == []):
             return 0
         else:
             return 1
