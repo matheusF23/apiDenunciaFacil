@@ -81,24 +81,31 @@ def selectOcurrence():
     return jsonify(out), 200
 
 # View Ocurrence by Id
-@app.route('/ocurrence/<string:_id>/', methods=['GET'])
-def selectOcurrenceById(_id):
+@app.route('/ocurrence/<int:id>/', methods=['GET'])
+def selectOcurrenceById(id):
     ocurrence = OcurrenceRepository()
-    out = ocurrence.readOcurrence(_id) 
+    out = ocurrence.readOcurrence(id) 
+    return jsonify(out), 200
+
+# View Ocurrence by User
+@app.route('/ocurrence/user/<string:cpf>/', methods=['GET'])
+def selectOcurrenceByUser(cpf):
+    ocurrence = OcurrenceRepository()
+    out = ocurrence.readOcurrenceByUser(cpf)
     return jsonify(out), 200
 
 # Update Ocurrence
-@app.route('/ocurrence/<string:_id>/', methods=['PUT'])
-def updatOcurrence(_id):
+@app.route('/ocurrence/<string:id>/', methods=['PUT'])
+def updatOcurrence(id):
     ocurrence = OcurrenceRepository()
     data = request.get_json()
-    return ocurrence.updateOcurrence(_id, data)
+    return ocurrence.updateOcurrence(id, data)
 
 # Delete Ocurrence
-@app.route('/ocurrence/<string:_id>', methods=['DELETE'])
-def deleteOcurrence(_id):
+@app.route('/ocurrence/<string:id>', methods=['DELETE'])
+def deleteOcurrence(id):
     ocurrence = OcurrenceRepository()
-    return ocurrence.deleteOcurrence(_id)
+    return ocurrence.deleteOcurrence(id)
 
 
 if __name__ == "__main__":
