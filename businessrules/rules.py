@@ -5,23 +5,17 @@ class Rules():
         self.cpf = cpf
         self.user = UserRepository()
 
-    def validateUserCreate(self):
-        if(self.user.readUser(self.cpf) == []):
-            return 1
-        else:
-            return 0
-    
-    def validateUserUpdate(self):
+    def validate(self):
         if(self.user.readUser(self.cpf) == []):
             return 0
         else:
             return 1
     
-    def validateUserDelete(self):
-        if(self.user.readUser(self.cpf) == []):
-            return 0
-        else:
-            return 1
+    # def validateDeleteUpdate(self):
+    #     if(self.user.readUser(self.cpf) == []):
+    #         return 0
+    #     else:
+    #         return 1
 
     def validateLoginUser(self, email, senha):
         UserLis = self.user.readUser(None)

@@ -12,8 +12,8 @@ def home():
 # Create User
 @app.route('/user/<string:cpf>/', methods=['POST'])
 def createUser(cpf):
-    validateUserCreate = Rules(cpf).validateUserCreate()
-    if (validateUserCreate == 1):
+    validateUserCreate = Rules(cpf).validate()
+    if (validateUserCreate == 0):
         user = UserRepository()
         data = request.get_json()
         return user.createUser(data)
@@ -34,7 +34,7 @@ def selectUserByCPF(cpf):
     out = user.readUser(cpf) 
     return jsonify(out), 200
 
-# View User by email
+# Login Validate
 @app.route('/user/<string:email>/<string:senha>/', methods=['GET'])
 def selectUserByEmail(email, senha):
     return Rules(None).validateLoginUser(email, senha)
@@ -42,7 +42,7 @@ def selectUserByEmail(email, senha):
 # Update User
 @app.route('/user/<string:cpf>/', methods=['PUT'])
 def updateUser(cpf):
-    validateUserUpdate = Rules(cpf).validateUserUpdate()
+    validateUserUpdate = Rules(cpf).validate()
     if (validateUserUpdate == 1):
         user = UserRepository()
         data = request.get_json()
@@ -53,7 +53,7 @@ def updateUser(cpf):
 # Delete User
 @app.route('/user/<string:cpf>/', methods=['DELETE'])
 def deleteUser(cpf):
-    validateUserDelete = Rules(cpf).validateUserDelete()
+    validateUserDelete = Rules(cpf).validate()
     if (validateUserDelete == 1):
         user = UserRepository()
         return user.deleteUser(cpf)
@@ -63,11 +63,15 @@ def deleteUser(cpf):
 
 ## Ocurrence routes ##
 # Create Ocurrence
-@app.route('/ocurrence/', methods=['POST'])
-def ocorrencia():
-    ocurrence = OcurrenceRepository()
-    dados = request.get_json()
-    return ocurrence.createOcurrence(dados)
+@app.route('/ocurrence/<string:cpf>/', methods=['POST'])
+def createOcurrence(cpf):
+    validateOcurrenceCreate = Rules(cpf).validate()
+    if (validateOcurrenceCreate == 1):
+        ocurrence = OcurrenceRepository()
+        data = request.get_json()
+        return ocurrence.createOcurrence(data)
+    else:
+        return "ERROR! User not found..", 404
 
 # View Ocurrence
 @app.route('/ocurrence/', methods=['GET'])
