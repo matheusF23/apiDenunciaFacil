@@ -21,21 +21,21 @@ def createUser(cpf):
         return "ERROR! User already exists.", 400
 
 # View User
-@app.route('/user/', methods=['GET'])
+@app.route('/user', methods=['GET'])
 def selectUser():
     user = UserRepository()
     out = user.readUser(None)
     return jsonify(out), 200
 
 # View User by CPF
-@app.route('/user/<string:cpf>/', methods=['GET'])
+@app.route('/user/<string:cpf>', methods=['GET'])
 def selectUserByCPF(cpf):
     user = UserRepository()
     out = user.readUser(cpf) 
     return jsonify(out), 200
 
 # Login Validate
-@app.route('/user/<string:email>/<string:senha>/', methods=['GET'])
+@app.route('/user/<string:email>/<string:senha>', methods=['GET'])
 def selectUserByEmail(email, senha):
     return Rules(None).validateLoginUser(email, senha)
 
@@ -51,7 +51,7 @@ def updateUser(cpf):
         return "ERROR! User not found.", 404
 
 # Delete User
-@app.route('/user/<string:cpf>/', methods=['DELETE'])
+@app.route('/user/<string:cpf>', methods=['DELETE'])
 def deleteUser(cpf):
     validateUserDelete = Rules(cpf).userValidate()
     if (validateUserDelete == 1):
