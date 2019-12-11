@@ -59,7 +59,7 @@ class UserRepository():
             cursor.close()
             conn.close()
 
-    def updateUser(self, _cpf, kwargs):
+    def updateUser(self, _email, kwargs):
         try:
             cpf = kwargs["cpf"]
             name = kwargs["name"]
@@ -70,7 +70,7 @@ class UserRepository():
             cursor = conn.cursor()
 
             cursor.execute("""UPDATE usuario SET cpf = ?, nome = ?, email = ?, senha = ? 
-                            WHERE cpf = ?""", (cpf, name, email, senha, _cpf))
+                            WHERE email = ?""", (cpf, name, email, senha, _email))
 
             conn.commit()
             return "User updated successfully!", 201
@@ -80,12 +80,12 @@ class UserRepository():
             cursor.close()
             conn.close()
     
-    def deleteUser(self, _cpf):
+    def deleteUser(self, _email):
         try:
             conn = sqlite3.connect('denunciafacil.db')
             cursor = conn.cursor()
 
-            cursor.execute("""DELETE FROM usuario WHERE cpf = ?""", (_cpf,))
+            cursor.execute("""DELETE FROM usuario WHERE email = ?""", (_email,))
 
             conn.commit()
             return "User deleted successfully!"
