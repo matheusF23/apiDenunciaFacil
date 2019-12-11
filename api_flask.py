@@ -10,9 +10,9 @@ def home():
 
 ## User routes ##
 # Create User
-@app.route('/user/<string:cpf>/', methods=['POST'])
-def createUser(cpf):
-    validateUserCreate = Rules(cpf).userValidate()
+@app.route('/user/<string:email>/', methods=['POST'])
+def createUser(email):
+    validateUserCreate = Rules(email).userValidate()
     if (validateUserCreate == 0):
         user = UserRepository()
         data = request.get_json()
