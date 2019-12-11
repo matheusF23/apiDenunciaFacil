@@ -63,9 +63,9 @@ def deleteUser(email):
 
 ## Occurrence routes ##
 # Create Occurrence
-@app.route('/occurrence/<string:cpf>/', methods=['POST'])
-def createOccurrence(cpf):
-    validateOccurrenceCreate = Rules(cpf).userValidate()
+@app.route('/occurrence/<string:email>/', methods=['POST'])
+def createOccurrence(email):
+    validateOccurrenceCreate = Rules(email).userValidate()
     if (validateOccurrenceCreate == 1):
         occurrence = OccurrenceRepository()
         data = request.get_json()

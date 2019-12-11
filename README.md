@@ -4,7 +4,7 @@
 ### Comandos para Usuário
 **Cadastrar um usuário:**
 
-[POST] https://api-denuncia-facil.herokuapp.com/user/cpf/arquivo.json
+[POST] https://api-denuncia-facil.herokuapp.com/user/email/arquivo.json
 
 **Visualizar usuarios:**
 
@@ -12,29 +12,29 @@
 
 **Visualizar usuarios por cpf:**
 
-[GET] https://api-denuncia-facil.herokuapp.com/user/cpf
+[GET] https://api-denuncia-facil.herokuapp.com/user/email
 
 **Validar login**
 
-[GET] https://api-denuncia-facil.herokuapp.com/user/email/cpf
+[GET] https://api-denuncia-facil.herokuapp.com/user/email/senha
 
 **Atualizar um usuário:**
-É preciso passar o cpf
+É preciso passar o email
 
-[PUT] https://api-denuncia-facil.herokuapp.com/user/cpf
+[PUT] https://api-denuncia-facil.herokuapp.com/user/email
 
 
 **Deletar um usuário:**
-É preciso passar o cpf
+É preciso passar o email
 
-[DELETE] https://api-denuncia-facil.herokuapp.com/user/cpf
+[DELETE] https://api-denuncia-facil.herokuapp.com/user/email
 
 ### Comandos para Ocorrência
 **Cadastrar uma ocorrência:**
 
 É preciso passar o cpf de quem fará a ocorrência
 
-[POST] https://api-denuncia-facil.herokuapp.com/occurrence/cpf/arquivo.json
+[POST] https://api-denuncia-facil.herokuapp.com/occurrence/email/arquivo.json
 
 **Visualizar ocorrências:**
 
