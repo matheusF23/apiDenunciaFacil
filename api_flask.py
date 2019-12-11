@@ -40,23 +40,23 @@ def selectUserByEmail(email, senha):
     return Rules(email).validateLoginUser(senha)
 
 # Update User
-@app.route('/user/<string:cpf>/', methods=['PUT'])
-def updateUser(cpf):
-    validateUserUpdate = Rules(cpf).userValidate()
+@app.route('/user/<string:email>/', methods=['PUT'])
+def updateUser(email):
+    validateUserUpdate = Rules(email).userValidate()
     if (validateUserUpdate == 1):
         user = UserRepository()
         data = request.get_json()
-        return user.updateUser(cpf, data)
+        return user.updateUser(email, data)
     else:
         return "ERROR! User not found.", 404
 
 # Delete User
-@app.route('/user/<string:cpf>', methods=['DELETE'])
-def deleteUser(cpf):
-    validateUserDelete = Rules(cpf).userValidate()
+@app.route('/user/<string:email>', methods=['DELETE'])
+def deleteUser(email):
+    validateUserDelete = Rules(email).userValidate()
     if (validateUserDelete == 1):
         user = UserRepository()
-        return user.deleteUser(cpf)
+        return user.deleteUser(email)
     else:
         return "ERROR! User not found.", 404
 
